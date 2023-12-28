@@ -7,4 +7,7 @@ import java.util.List;
 public interface UserService {
     /** 查询全部用户数据 */
     List<User> list();
+
+    /** 修改当前用户账户状态 */
+    void status(String userId, int status);
 }

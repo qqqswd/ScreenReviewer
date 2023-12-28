@@ -18,4 +18,9 @@ public class UserImpl implements UserService {
     public List<User> list() {
         return userMapper.list();
     }
+
+    @Override
+    public void status(String userId, int status) {
+        userMapper.status(userId, status);
+    }
 }
