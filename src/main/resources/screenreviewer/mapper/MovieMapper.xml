@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="screenreviewer.mapper.MovieMapper">
+    <update id="update">
+        update movie
+        <set>
+            <if test="title != null and title != ''">
+                title = #{title},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content},
+            </if>
+            <if test="score != null and score != ''">
+                score = #{score},
+            </if>
+            <if test="img != null and img != ''">
+                img = #{img},
+            </if>
+        </set>
+        where movie_id = #{movieId}
+    </update>
+</mapper>
