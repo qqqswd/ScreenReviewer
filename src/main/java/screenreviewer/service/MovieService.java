@@ -12,4 +12,8 @@ public interface MovieService {
     List<Movie> list();
 
     void update(Movie movie);
+
+    List<Movie> sortList();
+
+    void addScore(String movieId);
 }

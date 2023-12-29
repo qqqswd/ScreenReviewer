@@ -1,9 +1,6 @@
 package screenreviewer.mapper;
 
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import screenreviewer.pojo.Movie;
 
 import java.util.List;
@@ -24,4 +21,18 @@ public interface MovieMapper {
 
     /** 更新影片信息 */
     void update(Movie movie);
+
+    /** 根据影片评分排序查询 */
+    @Select("select * from movie order by score desc ")
+    List<Movie> sortList();
+
+    /** 根据影片id查询并计算所有评分均值并插入影片信息 */
+    @Update("UPDATE movie m \n" +
+            "SET m.score = COALESCE((\n" +
+            "    SELECT AVG(c.score)\n" +
+            "    FROM comment c\n" +
+            "    WHERE c.movie_id = m.movie_id \n" +
+            "), 0)\n" +
+            "WHERE m.movie_id = #{movieId};\n")
+    void addScore(String movieId);
 }

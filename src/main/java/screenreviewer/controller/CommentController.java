@@ -2,13 +2,11 @@ package screenreviewer.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import screenreviewer.pojo.Comment;
 import screenreviewer.pojo.Result;
 import screenreviewer.service.CommentService;
+import screenreviewer.service.MovieService;
 
 import java.util.List;
 
@@ -19,6 +17,9 @@ public class CommentController {
     @Autowired
     private CommentService commentService;
 
+    @Autowired
+    private MovieService movieService;
+
     @GetMapping("comment/{movieId}")
     public Result getById(@PathVariable String movieId) {
         log.info("查询当前影片所有评论和评分:{}", movieId);
@@ -26,10 +27,18 @@ public class CommentController {
         return Result.success(commentList);
     }
 
-    @DeleteMapping("comment/{commentId}")
-    public Result delete(@PathVariable String commentId) {
-        log.info("根据学号删除学生:{}", commentId);
-        commentService.delete(commentId);
+    @DeleteMapping("/delete")
+    public Result delete(@RequestBody Comment comment) {
+        log.info("根据评论id删除学生:{}", comment.getCommentId());
+        commentService.delete(comment.getCommentId());
+        movieService.addScore(comment.getMovieId());
+        return Result.success();
+    }
+
+    @PostMapping("/addComment")
+    public Result add(@RequestBody Comment comment) {
+        commentService.add(comment);
+        movieService.addScore(comment.getMovieId());
         return Result.success();
     }
 }

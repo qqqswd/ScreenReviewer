@@ -1,6 +1,7 @@
 package screenreviewer.mapper;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Select;
 import screenreviewer.pojo.Comment;
@@ -15,5 +16,10 @@ public interface CommentMapper {
 
     /** 更具当前评论id删除评论 */
     @Delete("delete from comment where comment_id = #{commentID}")
-    void delete(String commentId);
+    void delete(int commentId);
+
+    /** 添加评论 */
+    @Insert("insert into comment(user_id, movie_id, comment, score, create_time) " +
+            "value(#{userId}, #{movieId}, #{comment}, #{score}, #{createTime})")
+    void add(Comment comment);
 }

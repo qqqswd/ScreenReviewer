@@ -37,10 +37,18 @@ public class MovieController {
         return Result.success(movieList);
     }
 
+    @GetMapping("/sortMovie")
+    public Result sortList() {
+        log.info("查询全部影片数据并根据评分排序");
+        List<Movie> sortedList = movieService.sortList();
+        return Result.success(sortedList);
+    }
+
     @PutMapping("/updateMovie")
     public Result update(@RequestBody Movie movie) {
         log.info("更新影片信息:{}", movie.getMovieId());
         movieService.update(movie);
         return Result.success();
     }
+
 }

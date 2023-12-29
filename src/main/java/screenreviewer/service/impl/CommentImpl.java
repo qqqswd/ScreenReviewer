@@ -6,6 +6,7 @@ import screenreviewer.mapper.CommentMapper;
 import screenreviewer.pojo.Comment;
 import screenreviewer.service.CommentService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -19,7 +20,13 @@ public class CommentImpl implements CommentService {
     }
 
     @Override
-    public void delete(String commentId) {
+    public void delete(int commentId) {
         commentMapper.delete(commentId);
+    }
+
+    @Override
+    public void add(Comment comment) {
+        comment.setCreateTime(LocalDateTime.now());
+        commentMapper.add(comment);
     }
 }

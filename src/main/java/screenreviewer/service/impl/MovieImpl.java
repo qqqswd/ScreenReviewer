@@ -32,4 +32,14 @@ public class MovieImpl implements MovieService {
     public void update(Movie movie) {
         movieMapper.update(movie);
     }
+
+    @Override
+    public List<Movie> sortList() {
+        return movieMapper.sortList();
+    }
+
+    @Override
+    public void addScore(String movieId) {
+        movieMapper.addScore(movieId);
+    }
 }
