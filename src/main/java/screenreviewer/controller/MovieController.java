@@ -51,4 +51,10 @@ public class MovieController {
         return Result.success();
     }
 
+    @GetMapping("/searchMovie/{searchWord}")
+    public Result searchMovie(@PathVariable String searchWord) {
+        log.info("查询全部影片数据");
+        List<Movie> movieList = movieService.search(searchWord);
+        return Result.success(movieList);
+    }
 }

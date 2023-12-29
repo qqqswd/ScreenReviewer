@@ -11,7 +11,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/admin")
+//@RequestMapping("/admin")
 public class UserController {
 
     @Autowired
@@ -28,6 +28,13 @@ public class UserController {
     public Result status(@RequestBody User user) {
         log.info("修改当前用户状态");
         userService.status(user.getUserId(), user.getStatus());
+        return Result.success();
+    }
+
+    @PostMapping("/addUser")
+    public Result add(@RequestBody User user) { // 将json变成实体类传进来
+        log.info("用户注册:{}",user.getUserName());
+        userService.addUser(user);
         return Result.success();
     }
 }

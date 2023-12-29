@@ -23,4 +23,14 @@ public class UserImpl implements UserService {
     public void status(String userId, int status) {
         userMapper.status(userId, status);
     }
+
+    @Override
+    public void addUser(User user) {
+        userMapper.addUser(user);
+    }
+
+    @Override
+    public User login(User user) {
+        return userMapper.getByUserIdAndPassword(user);
+    }
 }

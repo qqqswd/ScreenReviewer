@@ -42,4 +42,9 @@ public class MovieImpl implements MovieService {
     public void addScore(String movieId) {
         movieMapper.addScore(movieId);
     }
+
+    @Override
+    public List<Movie> search(String searchWord) {
+        return movieMapper.search(searchWord);
+    }
 }

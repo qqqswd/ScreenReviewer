@@ -1,5 +1,6 @@
 package screenreviewer.service;
 
+import screenreviewer.pojo.Admin;
 import screenreviewer.pojo.User;
 
 import java.util.List;
@@ -10,4 +11,8 @@ public interface UserService {
 
     /** 修改当前用户账户状态 */
     void status(String userId, int status);
+
+    void addUser(User user);
+
+    User login(User user);
 }

@@ -16,4 +16,6 @@ public interface MovieService {
     List<Movie> sortList();
 
     void addScore(String movieId);
+
+    List<Movie> search(String searchWord);
 }

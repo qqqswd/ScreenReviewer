@@ -35,4 +35,7 @@ public interface MovieMapper {
             "), 0)\n" +
             "WHERE m.movie_id = #{movieId};\n")
     void addScore(String movieId);
+
+    @Select("SELECT * FROM movie WHERE title LIKE CONCAT('%', #{searchWord}, '%')")
+    List<Movie> search(String searchWord);
 }
