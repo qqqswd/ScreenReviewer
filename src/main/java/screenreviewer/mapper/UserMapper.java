@@ -10,8 +10,8 @@ import java.util.List;
 
 @Mapper
 public interface UserMapper {
-    /** 查询全部用户数据 */
-    @Select("select user_id, user_name, status from user")
+    /** 查询全部待审核用户数据 */
+    @Select("select user_id, user_name, status from user where status = 0")
     List<User> list();
 
     /** 修改当前用户账户状态 */

@@ -3,6 +3,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import screenreviewer.annotation.Log;
 import screenreviewer.pojo.Result;
 import java.io.File;
 import java.io.IOException;
@@ -16,6 +17,7 @@ public class UploadController {
 //    private AliOSSUtils aliOSSUtils;
 
     //本地存储文件
+    @Log
     @PostMapping("/upload")
     public Result upload(MultipartFile image) throws Exception {
         log.info("文件上传:{}",image);

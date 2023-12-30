@@ -3,6 +3,7 @@ package screenreviewer.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import screenreviewer.annotation.Log;
 import screenreviewer.pojo.Comment;
 import screenreviewer.pojo.Result;
 import screenreviewer.service.CommentService;
@@ -20,6 +21,7 @@ public class CommentController {
     @Autowired
     private MovieService movieService;
 
+    @Log
     @GetMapping("comment/{movieId}")
     public Result getById(@PathVariable String movieId) {
         log.info("查询当前影片所有评论和评分:{}", movieId);
@@ -27,14 +29,16 @@ public class CommentController {
         return Result.success(commentList);
     }
 
+    @Log
     @DeleteMapping("/delete")
     public Result delete(@RequestBody Comment comment) {
-        log.info("根据评论id删除学生:{}", comment.getCommentId());
+        log.info("根据评论id删除评论:{}", comment.getCommentId());
         commentService.delete(comment.getCommentId());
         movieService.addScore(comment.getMovieId());
         return Result.success();
     }
 
+    @Log
     @PostMapping("/addComment")
     public Result add(@RequestBody Comment comment) {
         commentService.add(comment);

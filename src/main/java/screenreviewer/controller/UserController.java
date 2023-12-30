@@ -3,6 +3,7 @@ package screenreviewer.controller;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import screenreviewer.annotation.Log;
 import screenreviewer.pojo.Result;
 import screenreviewer.pojo.User;
 import screenreviewer.service.UserService;
@@ -24,6 +25,7 @@ public class UserController {
         return Result.success(userList);
     }
 
+    @Log
     @PutMapping("/status")
     public Result status(@RequestBody User user) {
         log.info("修改当前用户状态");
@@ -32,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping("/addUser")
-    public Result add(@RequestBody User user) { // 将json变成实体类传进来
+    public Result add(@RequestBody User user) {
         log.info("用户注册:{}",user.getUserName());
         userService.addUser(user);
         return Result.success();
