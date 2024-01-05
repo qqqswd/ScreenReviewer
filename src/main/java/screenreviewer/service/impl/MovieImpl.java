@@ -47,4 +47,9 @@ public class MovieImpl implements MovieService {
     public List<Movie> search(String searchWord) {
         return movieMapper.search(searchWord);
     }
+
+    @Override
+    public Movie getMovieById(String movieId) {
+        return movieMapper.getMovieById(movieId);
+    }
 }

@@ -12,6 +12,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@CrossOrigin(origins = "http://localhost:8080")
 public class MovieController {
 
     @Autowired
@@ -61,5 +62,12 @@ public class MovieController {
     public Result searchMovie(@PathVariable String searchWord) {
         List<Movie> movieList = movieService.search(searchWord);
         return Result.success(movieList);
+    }
+
+    @Log
+    @GetMapping("/getMovieById/{movieId}")
+    public Result getMovieById(@PathVariable String movieId) {
+        Movie movie = movieService.getMovieById(movieId);
+        return Result.success(movie);
     }
 }

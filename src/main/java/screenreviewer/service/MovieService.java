@@ -18,4 +18,6 @@ public interface MovieService {
     void addScore(String movieId);
 
     List<Movie> search(String searchWord);
+
+    Movie getMovieById(String movieId);
 }
